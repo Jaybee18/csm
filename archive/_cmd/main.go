@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 
+	config "github.com/Jaybee18/gcsm/internal/config"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/urfave/cli/v2"
 )
@@ -13,6 +15,10 @@ type Alias struct {
 	Name        string
 	Command     string
 	Description string
+}
+
+func (a *Alias) isEmpty() bool {
+	return a.Name == "" && a.Command == "" && a.Description == ""
 }
 
 var aliases = []Alias{
@@ -44,7 +50,15 @@ func print_test_table() error {
 	return nil
 }
 
-func run_command_temp(ctx *cli.Context) error {
+func run_command_temp(cfg *config.Config, ctx *cli.Context) error {
+	if cfg == nil {
+		return fmt.Errorf("config is nil")
+	}
+
+	if ctx == nil {
+		return fmt.Errorf("context is nil")
+	}
+
 	args := ctx.Args()
 	if args.Len() != 1 {
 		return fmt.Errorf("len args != 1; TODO")
@@ -58,7 +72,17 @@ func run_command_temp(ctx *cli.Context) error {
 		}
 	}
 
-	fmt.Println(fmt.Sprintf("%+v\n", alias))
+	if alias.isEmpty() {
+		return nil
+	}
+
+	cmd := exec.Command(cfg.Shell[0], cfg.Shell[1], alias.Command)
+	stdout, err := cmd.Output()
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(string(stdout[:]))
 
 	return nil
 }
@@ -79,7 +103,8 @@ func main() {
 				Name:  "run",
 				Usage: "run the command of the given alias",
 				Action: func(ctx *cli.Context) error {
-					return run_command_temp(ctx)
+					config := config.GetConfig()
+					return run_command_temp(config, ctx)
 				},
 				Aliases: []string{"r"},
 			},
