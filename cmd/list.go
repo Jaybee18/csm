@@ -6,13 +6,16 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/Jaybee18/gcsm/internal/utils"
+	"github.com/Jaybee18/gocsm/internal/utils"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 )
 
 func listAliases(cmd *cobra.Command, args []string) error {
-	aliases := utils.GetAliases()
+	aliases, err := utils.GetAliases()
+	if err != nil {
+		return err
+	}
 
 	t := table.NewWriter()
 

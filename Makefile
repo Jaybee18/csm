@@ -1,3 +1,3 @@
 build:
-	go build -o bin/goscm
+	go build -o bin/gocsm
 

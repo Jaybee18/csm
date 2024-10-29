@@ -4,12 +4,40 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
+
+	"github.com/Jaybee18/gocsm/internal/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
 func addCommand(cmd *cobra.Command, args []string) error {
-	configAliases, ok := viper.Get("aliases").(map[string][]string)
+	if len(args) != 2 {
+		return fmt.Errorf("Too few arguments")
+	}
+
+	name := args[0]
+	command := args[1]
+	description, _ := cmd.Flags().GetString("description")
+
+	aliases, err := utils.GetAliases()
+	if err != nil {
+		return err
+	}
+
+	if !utils.GetAliasWithName(name).IsEmpty() {
+		return fmt.Errorf("Command with alias \"%s\" already exists", name)
+	}
+
+	alias := &utils.Alias{
+		Name:        name,
+		Command:     command,
+		Description: description,
+	}
+
+	aliases = append(aliases, alias)
+
+	viper.Set("aliases", aliases)
 	viper.WriteConfig()
 	return nil
 }

@@ -6,7 +6,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/Jaybee18/gcsm/internal/config"
+	"github.com/Jaybee18/gocsm/internal/config"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 )

@@ -1,4 +1,4 @@
-module github.com/Jaybee18/gcsm
+module github.com/Jaybee18/gocsm
 
 go 1.23.1
 

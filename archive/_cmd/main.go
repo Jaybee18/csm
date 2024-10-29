@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	config "github.com/Jaybee18/gcsm/internal/config"
+	config "github.com/Jaybee18/gocsm/internal/config"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/urfave/cli/v2"
 )
@@ -89,7 +89,7 @@ func run_command_temp(cfg *config.Config, ctx *cli.Context) error {
 
 func main() {
 	app := &cli.App{
-		Name:  "gcsm",
+		Name:  "gocsm",
 		Usage: "Manage scripts and commands",
 		Commands: []*cli.Command{
 			{
