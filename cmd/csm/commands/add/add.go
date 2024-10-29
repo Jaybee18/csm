@@ -6,7 +6,7 @@ package add
 import (
 	"fmt"
 
-	"github.com/Jaybee18/gocsm/internal/utils"
+	"github.com/Jaybee18/csm/internal/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

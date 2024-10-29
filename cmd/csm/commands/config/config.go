@@ -14,14 +14,14 @@ func configCommand(cmd *cobra.Command, args []string) {
 func NewCommand() *cobra.Command {
 	command := &cobra.Command{
 		Use:   "config",
-		Short: "Configure the config file for gocsm",
+		Short: "Configure the config file for csm",
 		Run:   configCommand,
 		Args:  cobra.ExactArgs(1),
 	}
 
 	editCommand := &cobra.Command{
 		Use:   "edit",
-		Short: "Edit the gocsm config file with the default editor in $EDITOR",
+		Short: "Edit the csm config file with the default editor in $EDITOR",
 		Run:   configEditCommand,
 	}
 

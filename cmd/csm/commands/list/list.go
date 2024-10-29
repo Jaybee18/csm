@@ -6,7 +6,7 @@ package list
 import (
 	"fmt"
 
-	"github.com/Jaybee18/gocsm/internal/utils"
+	"github.com/Jaybee18/csm/internal/utils"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 )

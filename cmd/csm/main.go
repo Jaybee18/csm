@@ -15,7 +15,7 @@ var shell []string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "gocsm",
+	Use:   "csm",
 	Short: "A brief description of your application",
 	Long: `A longer description that spans multiple lines and likely contains
 examples and usage of using your application. For example:
@@ -38,7 +38,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.gocsm.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.csm.yaml)")
 	rootCmd.PersistentFlags().StringSliceVar(&shell, "shell", []string{"/bin/sh", "-c"}, "shell for commands")
 
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
@@ -56,10 +56,10 @@ func initConfig() {
 		home, err := os.UserHomeDir()
 		cobra.CheckErr(err)
 
-		// Search config in home directory with name ".gocsm" (without extension).
+		// Search config in home directory with name ".csm" (without extension).
 		viper.AddConfigPath(home)
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".gocsm")
+		viper.SetConfigName(".csm")
 	}
 
 	// If a config file is found, read it in.

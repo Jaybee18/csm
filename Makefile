@@ -1,5 +1,5 @@
 build:
-	go build -o bin/gocsm
+	go build -o bin/csm
 
 install:
 	go install

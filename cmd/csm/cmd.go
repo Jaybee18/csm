@@ -4,11 +4,11 @@ Copyright © 2024 Jan Bessler jbessler.business@gmail.com
 package cmd
 
 import (
-	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/add"
-	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/config"
-	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/list"
-	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/remove"
-	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/run"
+	"github.com/Jaybee18/csm/cmd/csm/commands/add"
+	"github.com/Jaybee18/csm/cmd/csm/commands/config"
+	"github.com/Jaybee18/csm/cmd/csm/commands/list"
+	"github.com/Jaybee18/csm/cmd/csm/commands/remove"
+	"github.com/Jaybee18/csm/cmd/csm/commands/run"
 )
 
 func InitCommand() {

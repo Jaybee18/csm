@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Jaybee18/gocsm/internal/utils"
+	"github.com/Jaybee18/csm/internal/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -19,7 +19,7 @@ func configInitCommand(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	path := configPath + "/.gocsm.yaml"
+	path := configPath + "/.csm.yaml"
 	if _, err := os.Stat(path); err == nil {
 		fmt.Println("Config file already exists at " + path)
 	}

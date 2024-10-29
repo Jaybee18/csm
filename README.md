@@ -1,9 +1,9 @@
-# gocsm
+# csm
 Go CLI script management tool
 
 ## Installation
 ```sh
-go install github.com/Jaybee18/gocsm@latest
+go install github.com/Jaybee18/csm@latest
 ```
 
 ## Development
@@ -16,34 +16,34 @@ Run with
 $ go run main.go
 
 # or after building
-$ ./bin/gocsm
+$ ./bin/csm
 ```
 
 ## Configure autocompletion
 Powershell
 ```powershell
 # Only for the current shell:
-PS> gocsm completion powershell | Out-String | Invoke-Expression
+PS> csm completion powershell | Out-String | Invoke-Expression
 
 # For all shells, source this file from the powershell profile:
-PS> gocsm completion powershell > gocsm.ps1
+PS> csm completion powershell > csm.ps1
 ```
 
 Bash
 ```sh
 # Only for the current shell
-$ source <(gocsm completion bash)
+$ source <(csm completion bash)
 
 # For all shells:
 # Linux:
-$ gocsm completion bash > /etc/bash_completion.d/gocsm
+$ csm completion bash > /etc/bash_completion.d/csm
 # macOS:
-$ gocsm completion bash > $(brew --prefix)/etc/bash_completion.d/gocsm
+$ csm completion bash > $(brew --prefix)/etc/bash_completion.d/csm
 ```
 
 For more information, see the `completion` subcommand and its available subcommands:
 ```sh
-$ gocsm completion --help
+$ csm completion --help
 # then
-$ gocsm completion <command> --help
+$ csm completion <command> --help
 ```
