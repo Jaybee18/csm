@@ -1,7 +1,7 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 Jan Bessler jbessler.business@gmail.com
 */
-package cmd
+package add
 
 import (
 	"fmt"
@@ -42,21 +42,20 @@ func addCommand(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// addCmd represents the add command
-var addCmd = &cobra.Command{
-	Use:   "add <alias> <command>",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+func NewCommand() *cobra.Command {
+	command := &cobra.Command{
+		Use:   "add <alias> <command>",
+		Short: "A brief description of your command",
+		Long: `A longer description that spans multiple lines and likely contains examples
+	and usage of using your command. For example:
+	
+	Cobra is a CLI library for Go that empowers applications.
+	This application is a tool to generate the needed files
+	to quickly create a Cobra application.`,
+		RunE: addCommand,
+	}
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	RunE: addCommand,
-}
+	command.Flags().StringP("description", "d", "", "Description for the command")
 
-func init() {
-	rootCmd.AddCommand(addCmd)
-
-	addCmd.Flags().StringP("description", "d", "", "Description for the command")
+	return command
 }

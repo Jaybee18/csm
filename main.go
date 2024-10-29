@@ -3,7 +3,7 @@ Copyright © 2024 Jan Bessler jbessler.business@gmail.com
 */
 package main
 
-import "github.com/Jaybee18/gocsm/cmd"
+import cmd "github.com/Jaybee18/gocsm/cmd/gocsm"
 
 func main() {
 	cmd.Execute()

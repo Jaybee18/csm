@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 Jan Bessler jbessler.business@gmail.com
 */
 package cmd
 
@@ -50,6 +50,8 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	InitCommand()
 }
 
 // initConfig reads in config file and ENV variables if set.
