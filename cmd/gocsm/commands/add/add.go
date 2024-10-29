@@ -42,15 +42,9 @@ func addCommand(cmd *cobra.Command, args []string) {
 func NewCommand() *cobra.Command {
 	command := &cobra.Command{
 		Use:   "add <alias> <command>",
-		Short: "A brief description of your command",
-		Long: `A longer description that spans multiple lines and likely contains examples
-	and usage of using your command. For example:
-	
-	Cobra is a CLI library for Go that empowers applications.
-	This application is a tool to generate the needed files
-	to quickly create a Cobra application.`,
-		Run:  addCommand,
-		Args: cobra.ExactArgs(2),
+		Short: "Add a command under the given alias",
+		Run:   addCommand,
+		Args:  cobra.ExactArgs(2),
 	}
 
 	command.Flags().StringP("description", "d", "", "Description for the command")

@@ -26,7 +26,10 @@ func GetAliases() ([]*Alias, error) {
 
 	rawAliases, ok := viper.Get("aliases").([]interface{})
 	if !ok {
-		return aliases, fmt.Errorf("Could not cast aliases; type of: %s", reflect.TypeOf(viper.Get("aliases")).String())
+		if viper.Get("aliases") == nil {
+			return aliases, fmt.Errorf("No aliases found. Did you setup the config file?")
+		}
+		return aliases, fmt.Errorf("Could not cast aliases; type of: %s", reflect.TypeOf(viper.Get("aliases")))
 	}
 
 	for _, rawAlias := range rawAliases {

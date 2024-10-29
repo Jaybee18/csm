@@ -27,5 +27,13 @@ func NewCommand() *cobra.Command {
 
 	command.AddCommand(editCommand)
 
+	initCommand := &cobra.Command{
+		Use:   "init",
+		Short: "Init an empty config file",
+		Run:   configInitCommand,
+	}
+
+	command.AddCommand(initCommand)
+
 	return command
 }
