@@ -1,6 +1,24 @@
 # gocsm
 Go CLI script management tool
 
+## Installation
+```sh
+go install github.com/Jaybee18/gocsm@latest
+```
+
+## Development
+Build with
+```sh
+$ make buld
+```
+Run with
+```sh
+$ go run main.go
+
+# or after building
+$ ./bin/gocsm
+```
+
 ## Configure autocompletion
 Powershell
 ```powershell
