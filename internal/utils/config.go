@@ -1,3 +1,6 @@
+/*
+Copyright © 2024 Jan Bessler jbessler.business@gmail.com
+*/
 package utils
 
 import (
