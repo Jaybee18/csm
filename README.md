@@ -9,7 +9,7 @@ go install github.com/Jaybee18/gocsm@latest
 ## Development
 Build with
 ```sh
-$ make buld
+$ make build
 ```
 Run with
 ```sh
