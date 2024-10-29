@@ -11,22 +11,19 @@ import (
 	"github.com/spf13/viper"
 )
 
-func addCommand(cmd *cobra.Command, args []string) error {
-	if len(args) != 2 {
-		return fmt.Errorf("Too few arguments")
-	}
-
+func addCommand(cmd *cobra.Command, args []string) {
 	name := args[0]
 	command := args[1]
 	description, _ := cmd.Flags().GetString("description")
 
 	aliases, err := utils.GetAliases()
 	if err != nil {
-		return err
+		fmt.Println(err.Error())
+		return
 	}
 
 	if !utils.GetAliasWithName(name).IsEmpty() {
-		return fmt.Errorf("Command with alias \"%s\" already exists", name)
+		fmt.Println(fmt.Errorf("Command with alias \"%s\" already exists", name))
 	}
 
 	alias := &utils.Alias{
@@ -39,7 +36,7 @@ func addCommand(cmd *cobra.Command, args []string) error {
 
 	viper.Set("aliases", aliases)
 	viper.WriteConfig()
-	return nil
+	return
 }
 
 func NewCommand() *cobra.Command {
@@ -52,7 +49,7 @@ func NewCommand() *cobra.Command {
 	Cobra is a CLI library for Go that empowers applications.
 	This application is a tool to generate the needed files
 	to quickly create a Cobra application.`,
-		RunE: addCommand,
+		Run:  addCommand,
 		Args: cobra.ExactArgs(2),
 	}
 

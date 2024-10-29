@@ -12,16 +12,16 @@ import (
 	"github.com/spf13/viper"
 )
 
-func configEditCommand(cmd *cobra.Command, args []string) error {
+func configEditCommand(cmd *cobra.Command, args []string) {
 	editor := os.Getenv("EDITOR")
 
 	if editor == "" {
-		return fmt.Errorf("No editor configured; set $EDITOR env variable")
+		fmt.Println(fmt.Errorf("No editor configured; set $EDITOR env variable"))
 	}
 
 	configFile := viper.ConfigFileUsed()
 	if configFile == "" {
-		return fmt.Errorf("No config file found")
+		fmt.Println(fmt.Errorf("No config file found"))
 	}
 
 	command := exec.Command(editor, configFile)
@@ -30,12 +30,14 @@ func configEditCommand(cmd *cobra.Command, args []string) error {
 	command.Stderr = os.Stderr
 	err := command.Start()
 	if err != nil {
-		return err
+		fmt.Println(err.Error())
+		return
 	}
 	err = command.Wait()
 	if err != nil {
-		return err
+		fmt.Println(err.Error())
+		return
 	}
 
-	return nil
+	return
 }

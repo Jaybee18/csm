@@ -7,6 +7,7 @@ import (
 	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/add"
 	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/config"
 	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/list"
+	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/remove"
 	"github.com/Jaybee18/gocsm/cmd/gocsm/commands/run"
 )
 
@@ -14,5 +15,6 @@ func InitCommand() {
 	rootCmd.AddCommand(add.NewCommand())
 	rootCmd.AddCommand(config.NewCommand())
 	rootCmd.AddCommand(list.NewCommand())
+	rootCmd.AddCommand(remove.NewCommand())
 	rootCmd.AddCommand(run.NewCommand())
 }

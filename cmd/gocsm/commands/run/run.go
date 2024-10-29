@@ -11,14 +11,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func runCommand(cmd *cobra.Command, args []string) error {
-	if len(args) != 1 {
-		return fmt.Errorf("Too many args")
-	}
-
+func runCommand(cmd *cobra.Command, args []string) {
 	alias := utils.GetAliasWithName(args[0])
 	if alias.IsEmpty() {
-		return fmt.Errorf("Alias not found")
+		fmt.Println(fmt.Errorf("Alias not found"))
 	}
 
 	shell := utils.GetShell()
@@ -26,26 +22,29 @@ func runCommand(cmd *cobra.Command, args []string) error {
 	command := exec.Command(shell[0], shell[1], alias.Command)
 	stdout, err := command.Output()
 	if err != nil {
-		return err
+		fmt.Println(err.Error())
+		return
 	}
 
 	fmt.Print(string(stdout[:]))
+	return
+}
 
-	return nil
+func commandCompletion(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	aliases, err := utils.GetAliases()
+	if err != nil {
+		return []string{}, cobra.ShellCompDirectiveError
+	}
+	return utils.Map(aliases, func(alias *utils.Alias) string { return alias.Name }), cobra.ShellCompDirectiveNoFileComp
 }
 
 func NewCommand() *cobra.Command {
 	command := &cobra.Command{
-		Use:   "run",
-		Short: "A brief description of your command",
-		Long: `A longer description that spans multiple lines and likely contains examples
-	and usage of using your command. For example:
-	
-	Cobra is a CLI library for Go that empowers applications.
-	This application is a tool to generate the needed files
-	to quickly create a Cobra application.`,
-		RunE: runCommand,
-		Args: cobra.ExactArgs(1),
+		Use:               "run",
+		Short:             "Run the command stored under the given alias",
+		Run:               runCommand,
+		Args:              cobra.ExactArgs(1),
+		ValidArgsFunction: commandCompletion,
 	}
 
 	return command
