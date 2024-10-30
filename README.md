@@ -23,11 +23,11 @@ this is my test command
 To see the list of configured commands:
 ```
 $ csm ls
-╭──────────┬─────────────────────────────┬─────────────────────────╮
-│ ALIAS    │ COMMAND                     │ DESCRIPTION             │
-├──────────┼─────────────────────────────┼─────────────────────────┤
-│ my-alias │ lsof -i -P -n | grep LISTEN │ an optional description │
-╰──────────┴─────────────────────────────┴─────────────────────────╯
+╭──────────┬──────────────────────────────┬─────────────────────────╮
+│ ALIAS    │ COMMAND                      │ DESCRIPTION             │
+├──────────┼──────────────────────────────┼─────────────────────────┤
+│ my-alias │ echo this is my test command │ an optional description │
+╰──────────┴──────────────────────────────┴─────────────────────────╯
 ```
 To view help:
 ```
