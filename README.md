@@ -1,6 +1,15 @@
-# csm
-Go CLI script management tool for linux, macOS and windows with auto-completion.
+<div align="center">
 
+# csm
+![GoVersion](https://img.shields.io/github/go-mod/go-version/Jaybee18/csm)
+![Version](https://img.shields.io/github/v/release/Jaybee18/csm)
+![License](https://img.shields.io/github/license/Jaybee18/csm)
+![Stars](https://img.shields.io/github/stars/Jaybee18/csm)
+
+Go CLI script management tool for linux, macOS and windows with auto-completion and command arguments
+</br>
+</br>
+</div>
 Heavily inspired by [pier](https://github.com/pier-cli/pier) but since I can't understand and generally dislike Rust, it was of no use for me. So I made a similar, but simpler, tool in Go.
 
 ## Installation
@@ -16,11 +25,18 @@ $ csm config init
 Adding a new command:
 ```sh
 $ csm add my-alias "echo this is my test command" -d "an optional description"
+
+# or with arguments
+$ csm add second-alias "echo %0" -d "print the first argument"
 ```
 Using a command:
-```
+```sh
 $ csm run my-alias
 this is my test command
+
+# or with arguments
+$ csm run second-alias printme
+printme
 ```
 To see the list of configured commands:
 ```
