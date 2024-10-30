@@ -5,6 +5,8 @@ package list
 
 import (
 	"fmt"
+	"os"
+	"runtime"
 	"slices"
 
 	"github.com/Jaybee18/csm/utils"
@@ -50,7 +52,7 @@ Shrinks the biggest column to fit the terminal width.
 func listAliases(cmd *cobra.Command, args []string) {
 	aliases, err := utils.GetAliases()
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("Could not get aliases: " + err.Error())
 		return
 	}
 
@@ -75,7 +77,7 @@ func listAliases(cmd *cobra.Command, args []string) {
 
 	noFormat, err := cmd.Flags().GetBool("no-format")
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("Could not get no-format flag: " + err.Error())
 		return
 	}
 	if noFormat {
@@ -85,10 +87,15 @@ func listAliases(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	terminalWidth, _, err := term.GetSize(0)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
+	var terminalWidth int
+	if runtime.GOOS == "windows" {
+		terminalWidth = int(os.Stdout.Fd())
+	} else {
+		terminalWidth, _, err = term.GetSize(0)
+		if err != nil {
+			fmt.Println("Could not get terminal size: " + err.Error())
+			return
+		}
 	}
 
 	t := table.NewWriter()
