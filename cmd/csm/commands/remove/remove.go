@@ -6,7 +6,7 @@ package remove
 import (
 	"fmt"
 
-	"github.com/Jaybee18/csm/internal/utils"
+	"github.com/Jaybee18/csm/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -32,13 +32,22 @@ func removeCommand(cmd *cobra.Command, args []string) {
 	return
 }
 
+func commandCompletion(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	aliases, err := utils.GetAliases()
+	if err != nil {
+		return []string{}, cobra.ShellCompDirectiveError
+	}
+	return utils.Map(aliases, func(alias *utils.Alias) string { return alias.Name }), cobra.ShellCompDirectiveNoFileComp
+}
+
 func NewCommand() *cobra.Command {
 	command := &cobra.Command{
-		Use:     "remove <alias>",
-		Aliases: []string{"rm"},
-		Short:   "Remove the entry with the given alias",
-		Run:     removeCommand,
-		Args:    cobra.ExactArgs(1),
+		Use:               "remove <alias>",
+		Aliases:           []string{"rm"},
+		Short:             "Remove the entry with the given alias",
+		Run:               removeCommand,
+		Args:              cobra.ExactArgs(1),
+		ValidArgsFunction: commandCompletion,
 	}
 
 	return command
