@@ -6,23 +6,39 @@ package run
 import (
 	"fmt"
 	"os/exec"
+	"strings"
 
 	"github.com/Jaybee18/csm/utils"
 	"github.com/spf13/cobra"
 )
 
+const VAR_DELIMITER = "%"
+
 func runCommand(cmd *cobra.Command, args []string) {
 	alias := utils.GetAliasWithName(args[0])
 	if alias.IsEmpty() {
 		fmt.Println(fmt.Errorf("Alias not found"))
+		return
+	}
+
+	commandString := alias.Command
+
+	cmdArgs := args[1:]
+	for index, arg := range cmdArgs {
+		searchString := fmt.Sprintf("%s%d", VAR_DELIMITER, index)
+		if strings.Index(commandString, searchString) == -1 {
+			fmt.Println(fmt.Sprintf("No argument %q found in command:\n%s", searchString, alias.Command))
+			return
+		}
+		commandString = strings.Replace(commandString, searchString, arg, 1)
 	}
 
 	shell := utils.GetShell()
 
-	command := exec.Command(shell[0], shell[1], alias.Command)
+	command := exec.Command(shell[0], shell[1], commandString)
 	stdout, err := command.Output()
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("Error running command: " + err.Error())
 		return
 	}
 
@@ -43,7 +59,7 @@ func NewCommand() *cobra.Command {
 		Use:               "run",
 		Short:             "Run the command stored under the given alias",
 		Run:               runCommand,
-		Args:              cobra.ExactArgs(1),
+		Args:              cobra.MinimumNArgs(1),
 		ValidArgsFunction: commandCompletion,
 	}
 
