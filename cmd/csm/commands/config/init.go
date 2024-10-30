@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Jaybee18/csm/internal/utils"
+	"github.com/Jaybee18/csm/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
