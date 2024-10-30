@@ -10,6 +10,7 @@ Go CLI script management tool for linux, macOS and windows with auto-completion 
 </br>
 </br>
 </div>
+
 Heavily inspired by [pier](https://github.com/pier-cli/pier) but since I can't understand and generally dislike Rust, it was of no use for me. So I made a similar, but simpler, tool in Go.
 
 ## Installation
